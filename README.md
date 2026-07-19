@@ -8,7 +8,6 @@ Unlike traditional C bindings, **Poma** eliminates raw C boilerplate and transfo
 
 * **Explicit, Type-Safe API:** Separate structures for `COPY IN` (writing) and `COPY OUT` (reading) to catch protocol errors at compile time rather than runtime.
 * **Transparent Memory Management:** Automatic cleanup of C-allocated buffers (`libpq`'s `malloc`) during `COPY OUT` row iterations, preventing memory leaks seamlessly.
-* **Streaming-Ready:** Designed to integrate cleanly with native Zig abstractions like `std.io.Writer` for direct data or JSON streaming into PostgreSQL.
 * **Zero Boilerplate:** Centralized `libpq` error checking, logging, and automatic `PGresult` cleanup.
 
 ---
