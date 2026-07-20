@@ -25,8 +25,8 @@ zig fetch --save git+https://github.com/lahatra3/poma.git#main
 
 ### 2. Usage example
 
-```bash
-# build.zig
+```zig
+// build.zig
 
 const poma_dep = b.dependency("poma", .{
     .target = target,
@@ -37,8 +37,8 @@ const poma_mod = poma_dep.module("poma");
 exe.root_module.addImport("poma", poma_mod);
 ```
 
-```bash
-# main.zig
+```zig
+// main.zig
 
 const std = @import("std");
 const poma = @import("poma");
@@ -51,11 +51,11 @@ pub fn main(init: std.process.Init) !void {
 }
 ```
 
-```bash
-# COPY IN (Writing Data)
+```zig
+// COPY IN (Writing Data)
 var copy_in = try client.beginCopyIn("COPY app.users(id, username) FROM STDIN WITH CSV;");
 
-// Write data chunks sequentially
+// Write data chunks
 try copy_in.write("1, lahatra3\n");
 try copy_in.write("2, Jesoa\n");
 
@@ -63,9 +63,9 @@ try copy_in.write("2, Jesoa\n");
 try copy_in.end();
 ```
 
-```bash
-# COPY OUT (Reading Data)
-var copy_out = try client.beginCopyOut("COPY my_table TO STDOUT WITH CSV;");
+```zig
+// COPY OUT (Reading Data)
+var copy_out = try client.beginCopyOut("COPY app.users(id, username) TO STDOUT WITH CSV;");
 defer copy_out.deinit();
 
 while (try copy_out.read()) |row| {
