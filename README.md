@@ -20,7 +20,6 @@ Poma uses the official Zig package manager.
 Run the following command at the root of your main project:
 
 ```bash
-# If the project is published on GitHub
 zig fetch --save git+https://github.com/lahatra3/poma.git#main
 ```
 
