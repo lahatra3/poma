@@ -11,7 +11,7 @@ pub const PgCopyIn = struct {
             @intCast(data.len),
         );
         if (res != 1) {
-            std.log.err("[Postgresql]: ❌ COPY_IN in failed (write) ...", .{});
+            std.log.err("[Poma 🍎]: ❌ COPY_IN in failed (write) ...", .{});
             return error.PostgresCopyWriteFailed;
         }
     }
@@ -19,7 +19,7 @@ pub const PgCopyIn = struct {
     pub fn end(self: *PgCopyIn) !void {
         if (c.PQputCopyEnd(self.conn_handle, null) != 1) {
             std.log.err(
-                "[Postgresql]: ❌ COPY_IN in failed (end) ...",
+                "[Poma 🍎]: ❌ COPY_IN in failed (end) ...",
                 .{
                     std.mem.span(c.PQerrorMessage(self.conn_handle)),
                 },
@@ -35,7 +35,7 @@ pub const PgCopyIn = struct {
             const status = c.PQresultStatus(res);
             if (status != c.PGRES_COMMAND_OK) {
                 std.log.err(
-                    \\ [Postgresql]: ❌ COPY_IN failed at command completion ... 
+                    \\ [Poma 🍎]: ❌ COPY_IN failed at command completion ... 
                     \\  Status: {s},
                     \\  Error: {s}
                 ,
@@ -84,7 +84,7 @@ pub const PgCopyOut = struct {
                 const status = c.PQresultStatus(result);
                 if (status != c.PGRES_COMMAND_OK) {
                     std.log.err(
-                        \\ [Postgresql]: ❌ COPY_OUT failed at command completion ...
+                        \\ [Poma 🍎]: ❌ COPY_OUT failed at command completion ...
                         \\  Status: {s},
                         \\  Error: {s}
                     ,
@@ -103,7 +103,7 @@ pub const PgCopyOut = struct {
             return null;
         } else {
             std.log.err(
-                \\ [Postgresql]: ❌ COPY_OUT data read failed ...
+                \\ [Poma 🍎]: ❌ COPY_OUT data read failed ...
                 \\  Error: {s}
             ,
                 .{

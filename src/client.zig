@@ -10,13 +10,13 @@ pub const PgClient = struct {
 
     pub fn init(config: PgConfig) !PgClient {
         const conn = c.PQconnectdb(config.conn_info) orelse {
-            std.log.err("[Postgresql]: ❌ PGconn structure allocation failed ...", .{});
+            std.log.err("[Poma 🍎]: ❌ PGconn structure allocation failed ...", .{});
             return error.PostgresAllocationError;
         };
 
         if (c.PQstatus(conn) != c.CONNECTION_OK) {
             std.log.err(
-                \\ [Postgresql]: ❌ Connection failed ..., 
+                \\ [Poma 🍎]: ❌ Connection failed ..., 
                 \\  Error: {s}
             ,
                 .{
@@ -25,7 +25,7 @@ pub const PgClient = struct {
             );
             return error.PostgresConnectionFailed;
         }
-        std.log.info("[Postgresql]: ✅ Connection ready ...", .{});
+        std.log.info("[Poma 🍎]: ✅ Connection ready ...", .{});
 
         return PgClient{
             .handle = conn,
@@ -33,7 +33,7 @@ pub const PgClient = struct {
     }
 
     pub fn deinit(self: *PgClient) !void {
-        std.log.info("[Postgresql]: Closing connection ...", .{});
+        std.log.info("[Poma 🍎]: Closing connection ...", .{});
         c.PQfinish(self.handle);
     }
 
@@ -61,7 +61,7 @@ pub const PgClient = struct {
     ) !void {
         const res = c.PQexec(self.handle, query) orelse {
             std.log.err(
-                \\ [Postgresql]: ❌ PQexec NULL pointer ...
+                \\ [Poma 🍎]: ❌ PQexec NULL pointer ...
                 \\  Error: {s}
             ,
                 .{
@@ -75,7 +75,7 @@ pub const PgClient = struct {
         const res_status = c.PQresultStatus(res);
         if (res_status != expected_status) {
             std.log.err(
-                \\ [Postgresql]: ❌ Unexpected COPY status ...
+                \\ [Poma 🍎]: ❌ Unexpected COPY status ...
                 \\  Expected: {s}
                 \\  Got: {s},
                 \\  Error: {s}
