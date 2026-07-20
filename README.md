@@ -44,6 +44,7 @@ const std = @import("std");
 const poma = @import("poma");
 
 pub fn main(init: std.process.Init) !void {
+    _ = init;
     const client = try poma.PgClient.init(.{
         .conn_info = "host=localhost port=5432 dbname=ldf user=lahatra3 password=lahatrad",
     });
